@@ -1,0 +1,135 @@
+/* Simple, high-contrast styles for clarity and visibility */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+:root{
+  /* Pastel / professional palette */
+  --bg: #fbfaf9; /* very soft off-white */
+  --card: #ffffff; /* card background */
+  --text: #243b53; /* muted navy for text */
+  --accent: #c7b7f7; /* soft pastel lavender */
+  --accent-2: #ffd6e0; /* warm pastel peach */
+  --muted: #7b8ca3; /* subdued gray-blue */
+  --soft-border: #e6eef7;
+}
+
+html, body, #root{ height:100%; font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: var(--bg); color: var(--text); }
+
+.container{ padding-top:30px; padding-bottom:48px; max-width:960px; margin:0 auto; }
+
+/* Navbar - keep it simple */
+.navbar{ background: transparent; padding:14px 0; }
+.navbar .navbar-brand{ color: var(--text); font-weight:700; font-size:1.25rem; }
+.navbar .nav-link{ color: var(--muted); margin-right:12px; }
+.navbar .nav-link:hover{ color: var(--text); }
+
+/* Frosted glass navbar */
+.navbar{
+  background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.35));
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-radius:12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+.navbar .nav-link{ position:relative; transition: all 180ms ease; }
+.navbar .nav-link:hover{ transform: translateY(-3px) scale(1.02); color:var(--text); }
+.navbar .navbar-brand{ font-family: 'Poppins', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial; }
+
+/* Headings */
+h1,h2,h3{ color: var(--text); font-weight:700; margin-bottom:12px; font-family: 'Poppins', 'Nunito', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial; }
+h1{ font-size:1.9rem; }
+h3{ font-size:1.15rem; color:var(--muted); }
+
+/* Cards and panels */
+.card, .panel{ background: var(--card); border: 1px solid var(--soft-border); padding:20px; border-radius:16px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); transition: transform 220ms ease, box-shadow 220ms ease; }
+.card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.08); }
+
+/* Auth card (centered forms) */
+.auth-card{ width:100%; max-width:520px; background: var(--card); border:1px solid var(--soft-border); padding:30px 32px; border-radius:14px; box-shadow: 0 12px 36px rgba(36,59,83,0.06); }
+
+/* Make titles and labels slightly darker for better contrast */
+.auth-card h3{ margin-bottom:18px; color: #334155; font-weight:700; }
+.auth-card label{ color:#334155; font-weight:600; }
+
+/* Slightly larger inputs and balanced whitespace */
+.auth-card .form-control{ padding:14px 16px; font-size:1rem; border-radius:10px; }
+
+/* Make primary button text bolder and clearer */
+.auth-card .btn-primary{ font-size:1rem; font-weight:900; color:#2b2d42; padding:12px 28px; }
+
+
+/* Forms */
+label{ font-weight:600; color:var(--text); }
+.form-control{ width:100%; padding:14px 16px; font-size:1rem; border-radius:12px; border:1px solid var(--soft-border); background:#fff; color:var(--text); box-shadow:none; transition: box-shadow 180ms ease, transform 180ms ease; }
+.form-control:focus{ outline:0; border-color: rgba(199,183,247,0.85); box-shadow:0 10px 30px rgba(199,183,247,0.12); transform: translateY(-2px); }
+
+.form-group{ margin-bottom:18px; }
+
+/* Buttons */
+.btn-primary{
+  background-color: #e6e0ff; /* Normal lavender */
+  background-image: none !important;
+  border: none;
+  color: #2b2d42; /* dark text for readability */
+  padding: 12px 24px;
+  border-radius: 999px; /* pill */
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow: 0 8px 20px rgba(198,186,255,0.08);
+  transition: transform 300ms ease, box-shadow 300ms ease, background 300ms ease, color 300ms ease, filter 200ms ease;
+  display: inline-block;
+}
+.btn-primary:hover{
+  transform: scale(1.05);
+  /* derive a darker/warmer hover from the base color */
+  /* ensure hover uses a related solid color (avoid unexpected blue from other rules) */
+  filter: none;
+  background-color: #cfc3ff !important;
+  color: #2b2d42;
+  box-shadow: 0 24px 48px rgba(207,195,255,0.16), 0 8px 30px rgba(198,186,255,0.10);
+}
+.btn-primary:active{ transform: translateY(-2px); }
+.btn-secondary{ background-color:#f3efff; background-image:none !important; color:#2b2d42; border:1px solid rgba(207,195,255,0.45); padding:12px 18px; border-radius:12px; font-weight:700; box-shadow: 0 8px 20px rgba(207,195,255,0.06); transition: filter 200ms ease, box-shadow 200ms ease; }
+.btn-secondary:hover{ filter: none; background-color:#e6e0ff !important; box-shadow: 0 14px 28px rgba(191,174,248,0.12); }
+.btn-primary:focus, .btn-primary:focus-visible{
+  outline: none;
+  /* replace bootstrap blue ring with a soft lavender ring */
+  box-shadow: 0 6px 26px rgba(207,195,255,0.28), 0 0 0 6px rgba(199,183,247,0.12) !important;
+}
+.btn-primary:active{
+  transform: translateY(-1px);
+  filter: brightness(0.9) saturate(1.03);
+  box-shadow: 0 10px 30px rgba(191,174,248,0.16);
+}
+.btn-secondary:focus, .btn-secondary:focus-visible{
+  outline: none;
+  box-shadow: 0 6px 20px rgba(191,174,248,0.16), 0 0 0 6px rgba(207,195,255,0.08) !important;
+}
+.btn-accent-2{ background:#fff6f7; color:#1f2937; border:1px solid rgba(255,214,224,0.45); padding:12px 18px; border-radius:12px; font-weight:700; box-shadow: 0 8px 20px rgba(255,214,224,0.08); }
+.btn-accent-2:hover{ background: linear-gradient(90deg,#ffc8d3,#ffb3c4); color:#1f2937; box-shadow: 0 14px 28px rgba(255,162,185,0.16); }
+
+/* subtle underline animation for nav links */
+.navbar .nav-link::after{ content:''; position:absolute; left:0; right:0; bottom:-6px; height:3px; background: linear-gradient(90deg,var(--accent), var(--accent-2)); transform: scaleX(0); transform-origin:left; transition: transform 220ms ease; border-radius:3px; opacity:0.9; }
+.navbar .nav-link:hover::after{ transform: scaleX(1); }
+
+.btn-accent-2{ background: linear-gradient(90deg,var(--accent-2), #ffe8c7); color: #4a2d00; border:none; padding:10px 14px; border-radius:10px; }
+
+/* Alerts and messages */
+.alert{ background:#fff8e6; border:1px solid #ffe8a8; color:#6b4d00; padding:12px; border-radius:10px; }
+
+/* Badge */
+.badge{ background:#e6e0ff; color:#243b53; padding:6px 10px; border-radius:999px; font-weight:600; box-shadow: 0 6px 16px rgba(199,183,247,0.12); }
+
+/* Small utilities */
+.text-muted{ color: var(--muted); }
+.mb-3{ margin-bottom:1rem !important; }
+
+@media (max-width:768px){ .container{ padding-left:16px; padding-right:16px; }
+  .navbar{ padding:10px 0; }
+  .card{ padding:16px; border-radius:12px; }
+  h1{ font-size:1.4rem; }
+}
+
+/* Page transitions */
+.fade-in{ animation: fadeInUp 420ms ease both; }
+@keyframes fadeInUp{ from{ opacity:0; transform: translateY(10px); } to{ opacity:1; transform: translateY(0); } }

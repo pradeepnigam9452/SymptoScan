@@ -1,0 +1,3 @@
+Quick notes:
+- JWT expected in Authorization header as 'Bearer <token>'
+- healthHistory stores the symptom text and the Symptom document as result
