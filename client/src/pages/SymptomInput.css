@@ -1,0 +1,74 @@
+/* Background gradient and layout */
+.symptom-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  animation: gradientShift 10s ease infinite alternate;
+  padding: 20px;
+}
+
+/* Card styling */
+.form-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  max-width: 480px;
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.form-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Gradient text heading */
+.text-gradient {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+/* Animated button */
+.btn-animated {
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  transition: background 0.4s ease, transform 0.2s ease;
+}
+
+.btn-animated:hover {
+  background: linear-gradient(90deg, #2575fc, #6a11cb);
+  transform: scale(1.03);
+}
+
+/* Fade-in animation for the card */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* Shake animation for error messages */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+.animate-shake {
+  animation: shake 0.4s ease;
+}
+
+/* Background animation */
+@keyframes gradientShift {
+  0% { background-position: left; }
+  100% { background-position: right; }
+}

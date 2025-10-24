@@ -25,15 +25,65 @@ const data = [
     remedies: ['Steam inhalation', 'Vitamin C'],
     medicines: ['Cetirizine'],
     doctorRequired: false
-  }
-  ,{
+  },
+  {
     name: 'Stomach Pain',
     causes: ['Indigestion', 'Gastritis', 'Food poisoning'],
     remedies: ['Avoid solid food for few hours', 'Drink clear fluids', 'BRAT diet'],
     medicines: ['Antacid (e.g., Gaviscon)', 'Oral rehydration if vomiting/diarrhea'],
     doctorRequired: false
+  },
+  {
+    name: 'Diabetes',
+    causes: ['Genetics', 'Obesity', 'Sedentary lifestyle'],
+    remedies: ['Balanced diet', 'Exercise regularly', 'Monitor blood sugar'],
+    medicines: ['Metformin', 'Insulin'],
+    doctorRequired: true
+  },
+  {
+    name: 'Hypertension',
+    causes: ['High salt intake', 'Stress', 'Obesity', 'Genetics'],
+    remedies: ['Reduce salt', 'Exercise', 'Avoid alcohol and smoking'],
+    medicines: ['Amlodipine', 'Losartan'],
+    doctorRequired: true
+  },
+  {
+    name: 'Asthma',
+    causes: ['Allergens', 'Pollution', 'Genetics'],
+    remedies: ['Avoid triggers', 'Breathing exercises'],
+    medicines: ['Salbutamol inhaler', 'Fluticasone inhaler'],
+    doctorRequired: true
+  },
+  {
+    name: 'Allergy',
+    causes: ['Pollen', 'Dust', 'Food', 'Medications'],
+    remedies: ['Avoid allergens', 'Antihistamine'],
+    medicines: ['Cetirizine', 'Loratadine'],
+    doctorRequired: false
+  },
+  {
+    name: 'Back Pain',
+    causes: ['Poor posture', 'Muscle strain', 'Injury'],
+    remedies: ['Stretching', 'Physical therapy', 'Hot/cold compress'],
+    medicines: ['Ibuprofen', 'Paracetamol'],
+    doctorRequired: false
+  },
+  {
+    name: 'Chickenpox',
+    causes: ['Varicella-zoster virus'],
+    remedies: ['Rest', 'Oatmeal baths', 'Keep skin clean'],
+    medicines: ['Calamine lotion', 'Paracetamol'],
+    doctorRequired: true
+  },
+  {
+    name: 'Migraine',
+    causes: ['Hormonal changes', 'Stress', 'Certain foods', 'Sleep issues'],
+    remedies: ['Rest in dark room', 'Hydration', 'Cold/Hot compress'],
+    medicines: ['Sumatriptan', 'Paracetamol'],
+    doctorRequired: true
   }
 ];
+
 
 async function seed() {
   await mongoose.connect( 'mongodb://localhost:27017/symptom_checker');

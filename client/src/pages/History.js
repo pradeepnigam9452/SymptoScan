@@ -1,5 +1,113 @@
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import './History.css';
+// export default function History() {
+//   const [history, setHistory] = useState([]);
+//   const [msg, setMsg] = useState('');
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     async function load() {
+//       try {
+//         const token = localStorage.getItem('token');
+//         if (!token) {
+//           setMsg('No authentication token found.');
+//           setLoading(false);
+//           return;
+//         }
+
+//         const res = await axios.get('http://localhost:5000/api/user/history', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+
+//         // Sort by most recent
+//         setHistory((res.data.history || []).sort((a, b) => new Date(b.checkedAt) - new Date(a.checkedAt)));
+//       } catch (err) {
+//         setMsg(err.response?.data?.message || 'Error loading history');
+//       } finally {
+//         setLoading(false);
+//       }
+//     }
+//     load();
+//   }, []);
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-10 px-4">
+//       <div className="max-w-3xl mx-auto bg-white shadow-2xl rounded-2xl p-8">
+//         <h3 className="text-3xl font-bold text-center text-indigo-700 mb-6">
+//           🩺 Your Health History
+//         </h3>
+
+//         {/* Status messages */}
+//         {loading && (
+//           <div className="text-center text-indigo-500 font-medium animate-pulse">
+//             Loading your history...
+//           </div>
+//         )}
+//         {!loading && msg && (
+//           <div className="bg-red-100 text-red-800 border border-red-300 rounded-md p-3 mb-4 text-center">
+//             {msg}
+//           </div>
+//         )}
+//         {!loading && history.length === 0 && !msg && (
+//           <div className="bg-blue-100 text-blue-800 border border-blue-300 rounded-md p-3 text-center">
+//             No history yet. Start by checking your symptoms!
+//           </div>
+//         )}
+
+//         {/* History list */}
+//         <ul className="space-y-4">
+//           {history.map((h, idx) => (
+//             <li
+//               key={idx}
+//               className={`p-5 rounded-xl shadow-md transition-transform transform hover:scale-[1.02] ${
+//                 h.result?.doctorRequired
+//                   ? 'bg-red-50 border-l-4 border-red-400'
+//                   : 'bg-green-50 border-l-4 border-green-400'
+//               }`}
+//             >
+//               <div className="flex justify-between items-center mb-1">
+//                 <h4 className="text-xl font-semibold text-gray-800">{h.symptom}</h4>
+//                 <span className="text-sm text-gray-500">
+//                   {new Date(h.checkedAt).toLocaleString()}
+//                 </span>
+//               </div>
+//               <div className="text-gray-700 mt-1">
+//                 {h.result?.message ? (
+//                   <em
+//                     className={`${
+//                       h.result?.doctorRequired ? 'text-red-600' : 'text-green-600'
+//                     } font-medium`}
+//                   >
+//                     {h.result.message}
+//                   </em>
+//                 ) : (
+//                   <span>
+//                     Doctor required:{' '}
+//                     <span
+//                       className={
+//                         h.result?.doctorRequired
+//                           ? 'text-red-600 font-semibold'
+//                           : 'text-green-600 font-semibold'
+//                       }
+//                     >
+//                       {h.result?.doctorRequired ? 'Yes' : 'No'}
+//                     </span>
+//                   </span>
+//                 )}
+//               </div>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+//     </div>
+//   );
+// }
+
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './History.css';
 
 export default function History() {
   const [history, setHistory] = useState([]);
@@ -20,8 +128,11 @@ export default function History() {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        // Sort by most recent
-        setHistory((res.data.history || []).sort((a, b) => new Date(b.checkedAt) - new Date(a.checkedAt)));
+        setHistory(
+          (res.data.history || []).sort(
+            (a, b) => new Date(b.checkedAt) - new Date(a.checkedAt)
+          )
+        );
       } catch (err) {
         setMsg(err.response?.data?.message || 'Error loading history');
       } finally {
@@ -32,67 +143,51 @@ export default function History() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-10 px-4">
-      <div className="max-w-3xl mx-auto bg-white shadow-2xl rounded-2xl p-8">
-        <h3 className="text-3xl font-bold text-center text-indigo-700 mb-6">
-          🩺 Your Health History
-        </h3>
+    <div className="history-page">
+      <div className="history-card animate-fade-in">
+        <h3 className="history-title">🩺 Your Health History</h3>
 
         {/* Status messages */}
-        {loading && (
-          <div className="text-center text-indigo-500 font-medium animate-pulse">
-            Loading your history...
-          </div>
-        )}
-        {!loading && msg && (
-          <div className="bg-red-100 text-red-800 border border-red-300 rounded-md p-3 mb-4 text-center">
-            {msg}
-          </div>
-        )}
+        {loading && <div className="loading-placeholder">Loading history...</div>}
+        {!loading && msg && <div className="alert error animate-shake">{msg}</div>}
         {!loading && history.length === 0 && !msg && (
-          <div className="bg-blue-100 text-blue-800 border border-blue-300 rounded-md p-3 text-center">
-            No history yet. Start by checking your symptoms!
-          </div>
+          <div className="alert info">No history yet. Start by checking your symptoms!</div>
         )}
 
         {/* History list */}
-        <ul className="space-y-4">
+        <ul className="history-list">
           {history.map((h, idx) => (
             <li
               key={idx}
-              className={`p-5 rounded-xl shadow-md transition-transform transform hover:scale-[1.02] ${
-                h.result?.doctorRequired
-                  ? 'bg-red-50 border-l-4 border-red-400'
-                  : 'bg-green-50 border-l-4 border-green-400'
+              className={`history-item animate-slide-in ${
+                h.result?.doctorRequired ? 'urgent' : 'normal'
               }`}
+              style={{ animationDelay: `${idx * 0.08}s` }}
             >
-              <div className="flex justify-between items-center mb-1">
-                <h4 className="text-xl font-semibold text-gray-800">{h.symptom}</h4>
-                <span className="text-sm text-gray-500">
-                  {new Date(h.checkedAt).toLocaleString()}
-                </span>
+              <div className="history-header">
+                <h4>{h.symptom}</h4>
+                <span>{new Date(h.checkedAt).toLocaleString()}</span>
               </div>
-              <div className="text-gray-700 mt-1">
+
+              <div className="history-body">
                 {h.result?.message ? (
                   <em
                     className={`${
-                      h.result?.doctorRequired ? 'text-red-600' : 'text-green-600'
-                    } font-medium`}
+                      h.result?.doctorRequired ? 'text-danger' : 'text-success'
+                    }`}
                   >
                     {h.result.message}
                   </em>
                 ) : (
                   <span>
                     Doctor required:{' '}
-                    <span
+                    <strong
                       className={
-                        h.result?.doctorRequired
-                          ? 'text-red-600 font-semibold'
-                          : 'text-green-600 font-semibold'
+                        h.result?.doctorRequired ? 'text-danger' : 'text-success'
                       }
                     >
                       {h.result?.doctorRequired ? 'Yes' : 'No'}
-                    </span>
+                    </strong>
                   </span>
                 )}
               </div>

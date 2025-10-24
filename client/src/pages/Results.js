@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './Results.css';
 function Results(){
   const raw = localStorage.getItem('lastResult');
   const data = raw ? JSON.parse(raw) : null;

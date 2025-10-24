@@ -1,33 +1,55 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
+import './TopNav.css';
 
-export default function TopNav(){
+export default function TopNav() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  function doLogout(){
+  function doLogout() {
     logout();
     navigate('/login');
   }
 
   return (
-    <nav className="navbar navbar-expand bg-light mb-3">
-      <div className="container">
-        <Link to="/" className="navbar-brand">Symptom Checker</Link>
-        <div className="navbar-nav">
+    <nav className="topnav-container animate-fade-in">
+      <div className="topnav-content">
+        <Link to="/symptoms" className="brand">
+          🩺 Symptom Checker
+        </Link>
+
+        <div className="nav-links">
           {user ? (
+
             <>
-              <span className="navbar-text me-2">Hello, {user.name}</span>
-              <Link className="nav-link" to="/check">Check</Link>
-              <Link className="nav-link" to="/history">History</Link>
-              <Link className="nav-link" to="/symptoms">Seeded</Link>
-              <button className="btn btn-sm btn-outline-secondary ms-2" onClick={doLogout}>Logout</button>
+             <span className="user-name">Hello, {user.name}</span>
+             <Link className="nav-item" to="/home">
+                Home
+              </Link>
+             
+               <Link className="nav-item" to="/symptoms">
+                Symptoms
+              </Link>
+              <Link className="nav-item" to="/check">
+                Check
+              </Link>
+              <Link className="nav-item" to="/history">
+                History
+              </Link>
+             
+              <button className="logout-btn" onClick={doLogout}>
+                Logout
+              </button>
             </>
           ) : (
             <>
-              <Link className="nav-link" to="/login">Login</Link>
-              <Link className="nav-link" to="/register">Register</Link>
+              <Link className="nav-item" to="/login">
+                Login
+              </Link>
+              <Link className="nav-item" to="/register">
+                Register
+              </Link>
             </>
           )}
         </div>

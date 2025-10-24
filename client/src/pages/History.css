@@ -1,0 +1,145 @@
+/* 🌿 Clean, minimalist background */
+.history-page {
+  min-height: 100vh;
+  background: #f6f7fb;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 20px;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+/* 🧭 Main card container */
+.history-card {
+  background: #fff;
+  max-width: 700px;
+  width: 100%;
+  border-radius: 14px;
+  padding: 40px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+.history-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Heading */
+.history-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #1a2b49;
+}
+
+/* Alert messages */
+.alert {
+  text-align: center;
+  padding: 12px 18px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+.alert.error {
+  background: #f8d7da;
+  color: #842029;
+  border-left: 4px solid #dc3545;
+}
+.alert.info {
+  background: #e2e3e5;
+  color: #41464b;
+  border-left: 4px solid #adb5bd;
+}
+
+/* Loading placeholder */
+.loading-placeholder {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+/* List styling */
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* History item */
+.history-item {
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 12px;
+  border: 1px solid #e6e8ec;
+  transition: all 0.3s ease;
+}
+.history-item:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+}
+
+/* Item colors */
+.history-item.urgent {
+  border-left: 5px solid #dc3545;
+}
+.history-item.normal {
+  border-left: 5px solid #198754;
+}
+
+/* Header */
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.history-header h4 {
+  margin: 0;
+  font-weight: 600;
+  color: #222;
+}
+.history-header span {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Body text */
+.history-body {
+  font-size: 0.95rem;
+  color: #444;
+}
+.text-danger {
+  color: #dc3545;
+  font-weight: 500;
+}
+.text-success {
+  color: #198754;
+  font-weight: 500;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-15px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.7s ease forwards;
+}
+.animate-slide-in {
+  animation: slideIn 0.6s ease forwards;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+.animate-shake {
+  animation: shake 0.3s ease;
+}

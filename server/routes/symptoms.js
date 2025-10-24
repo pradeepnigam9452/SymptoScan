@@ -3,11 +3,10 @@ const router = express.Router();
 const Symptom = require('../models/Symptom');
 const auth = require('../middleware/auth');
 
-
+// ---------- HEURISTIC RESPONDER ----------
 function heuristicResponder(symptom) {
   if (!symptom) return null;
   const s = symptom.toLowerCase();
-
   const rules = [
     {
       test: /stomach|abdomen|belly|tummy|gastric/i,
@@ -64,6 +63,102 @@ function heuristicResponder(symptom) {
       remedies: ['Stop activity', 'Call emergency services if severe'],
       medicines: [],
       doctorRequired: true
+    },
+    {
+      test: /diarrhea|loose stool|watery stool/i,
+      name: 'Diarrhea',
+      causes: ['Food poisoning', 'Viral gastroenteritis', 'Irritable bowel syndrome'],
+      remedies: ['Hydrate frequently', 'Eat bland food', 'Avoid dairy'],
+      medicines: ['Oral rehydration solution', 'Loperamide if appropriate'],
+      doctorRequired: false
+    },
+    {
+      test: /fatigue|tired|exhausted/i,
+      name: 'Fatigue',
+      causes: ['Lack of sleep', 'Stress', 'Anemia', 'Thyroid issues'],
+      remedies: ['Rest', 'Balanced diet', 'Light exercise'],
+      medicines: [],
+      doctorRequired: false
+    },
+    {
+      test: /dizziness|lightheaded|vertigo/i,
+      name: 'Dizziness',
+      causes: ['Dehydration', 'Low blood sugar', 'Inner ear issues'],
+      remedies: ['Sit or lie down', 'Hydrate', 'Eat something light'],
+      medicines: [],
+      doctorRequired: true
+    },
+    {
+      test: /rash|itchy skin|hives/i,
+      name: 'Skin Rash',
+      causes: ['Allergic reaction', 'Infection', 'Irritant exposure'],
+      remedies: ['Avoid allergen', 'Cool compress', 'Moisturize'],
+      medicines: ['Antihistamines', 'Topical steroid cream'],
+      doctorRequired: true
+    },
+    {
+      test: /back pain|lower back|spine pain/i,
+      name: 'Back Pain',
+      causes: ['Muscle strain', 'Poor posture', 'Herniated disc'],
+      remedies: ['Rest', 'Stretching exercises', 'Heat/ice therapy'],
+      medicines: ['Paracetamol or Ibuprofen'],
+      doctorRequired: false
+    },
+    {
+      test: /sore throat|throat pain/i,
+      name: 'Sore Throat',
+      causes: ['Viral infection', 'Bacterial infection', 'Irritation'],
+      remedies: ['Warm salt water gargle', 'Hydrate', 'Rest voice'],
+      medicines: ['Lozenges', 'Paracetamol if needed'],
+      doctorRequired: false
+    },
+    {
+      test: /joint pain|knee pain|arthritis/i,
+      name: 'Joint Pain',
+      causes: ['Arthritis', 'Injury', 'Inflammation'],
+      remedies: ['Rest', 'Gentle exercise', 'Ice/heat therapy'],
+      medicines: ['Ibuprofen or Paracetamol'],
+      doctorRequired: false
+    },
+    {
+      test: /anxiety|nervous|panic/i,
+      name: 'Anxiety',
+      causes: ['Stress', 'Work pressure', 'Mental health condition'],
+      remedies: ['Relaxation techniques', 'Exercise', 'Therapy'],
+      medicines: [],
+      doctorRequired: false
+    },
+    {
+      test: /insomnia|can't sleep|sleep issues/i,
+      name: 'Insomnia',
+      causes: ['Stress', 'Irregular schedule', 'Caffeine'],
+      remedies: ['Sleep hygiene', 'Limit caffeine', 'Relaxation techniques'],
+      medicines: ['Melatonin if needed'],
+      doctorRequired: false
+    },
+    {
+      test: /constipation|hard stool/i,
+      name: 'Constipation',
+      causes: ['Low fiber diet', 'Dehydration', 'Medication side effect'],
+      remedies: ['Increase fiber', 'Hydrate', 'Exercise'],
+      medicines: ['Laxatives if needed'],
+      doctorRequired: false
+    },
+    {
+      test: /shortness of breath|difficulty breathing|breathless/i,
+      name: 'Shortness of Breath',
+      causes: ['Asthma', 'Pneumonia', 'Heart issues'],
+      remedies: ['Sit upright', 'Use inhaler if prescribed', 'Seek medical attention'],
+      medicines: [],
+      doctorRequired: true
+    },
+    {
+      test: /eye irritation|red eyes|itchy eyes/i,
+      name: 'Eye Irritation',
+      causes: ['Allergy', 'Dry eyes', 'Infection'],
+      remedies: ['Avoid rubbing', 'Lubricating eye drops', 'Cold compress'],
+      medicines: [],
+      doctorRequired: false
     }
   ];
 
@@ -285,3 +380,5 @@ router.get('/all', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+

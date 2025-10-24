@@ -1,0 +1,134 @@
+/* Page background with gradient */
+.symptom-list-page {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  min-height: 100vh;
+}
+
+/* Header styles */
+.symptom-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #120224, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2rem;
+}
+
+.text-light {
+  color: #c01a1a;
+}
+
+.search-bar {
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  width: 250px;
+  border-radius: 20px;
+  border: 1px solid #cccccc;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-bar:focus {
+  border-color: #2575fc;
+  box-shadow: 0 0 8px rgba(37, 117, 252, 0.3);
+}
+
+/* Grid layout */
+.symptom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Card styles with colors */
+.symptom-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.symptom-card:hover {
+  box-shadow: 0 12px 25px rgba(151, 21, 21, 0.15);
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, #fceabb, #28ce9c);
+}
+
+/* Expanded card */
+.symptom-card.expanded {
+  background: #eef2ff;
+}
+
+/* Card details */
+.symptom-details {
+  margin-top: 1rem;
+  color: #333;
+}
+
+/* No results */
+.no-results {
+  grid-column: 1/-1;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #c93232;
+}
+
+/* Text colors */
+.text-danger {
+  color: #e74c3c;
+}
+.text-success {
+  color: #27ae60;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}
+
+/* Preloader fade-in for 2-3 sec */
+.animate-fade-in {
+  animation: fadeIn 2.5s ease forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease forwards;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease;
+}
+
+/* Preloader screen */
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2575fc;
+}
