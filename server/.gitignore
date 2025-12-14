@@ -1,0 +1,48 @@
+.env 
+# ===============================
+# Node / Backend
+# ===============================
+node_modules/
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ===============================
+# Build outputs
+# ===============================
+dist/
+build/
+.out/
+
+# ===============================
+# Frontend (Vite / React)
+# ===============================
+
+
+# ===============================
+# OS / Editor files
+# ===============================
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# IntelliJ / WebStorm
+.idea/
+
+# ===============================
+# Cache files
+# ===============================
+.cache/
+.eslintcache
+
+# ===============================
+# Test coverage
+# ===============================
+coverage/

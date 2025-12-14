@@ -19,8 +19,8 @@ app.use('/api/symptoms', symptomRoutes);
 app.use('/api/user', userRoutes);
 
 const PORT = 5000;
-
-mongoose.connect('mongodb://localhost:27017/symptom_checker', {
+const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/symptom_checker';
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => {
