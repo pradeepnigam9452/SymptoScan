@@ -14,6 +14,9 @@ const userRoutes = require('./routes/user');
 app.use(cors());
 app.use(express.json());
 
+app.get('/',(req,res)=>{
+  res.json("server is on ")
+})
 
 
 app.use('/api/auth', authRoutes);
