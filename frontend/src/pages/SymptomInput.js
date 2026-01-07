@@ -1,9 +1,7 @@
-
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './SymptomInput.css'; // import custom styles
+import './SymptomInput.css';
 
 function SymptomInput() {
   const [formData, setFormData] = useState({
@@ -13,6 +11,8 @@ function SymptomInput() {
   });
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+
+  const API_URL = process.env.REACT_APP_API_URL || 'https://sympto-scan-red.vercel.app';
 
   const handleChange = (e) => {
     setFormData({
@@ -25,34 +25,32 @@ function SymptomInput() {
     e.preventDefault();
     setMessage('');
 
-    try {
-      const token = localStorage.getItem('token');
-      const { symptom } = formData;
+    const { symptom } = formData;
+    const token = localStorage.getItem('token');
 
-      try {
-        // Authenticated request
-        const res = await axios.post(
-          'http://localhost:5000/api/symptoms/check',
-          { symptom },
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        localStorage.setItem('lastResult', JSON.stringify(res.data));
-        navigate('/results');
-      } catch (innerErr) {
-        // Fallback for unauthorized users
-        if (innerErr.response?.status === 401) {
-          const publicRes = await axios.post(
-            'http://localhost:5000/api/symptoms/check-public',
-            { symptom }
-          );
+    try {
+      // Try authenticated request first
+      const res = await axios.post(
+        `${API_URL}/api/symptoms/check`,
+        { symptom },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      localStorage.setItem('lastResult', JSON.stringify(res.data));
+      navigate('/results');
+    } catch (err) {
+      // If unauthorized, try public endpoint
+      if (err.response?.status === 401) {
+        try {
+          const publicRes = await axios.post(`${API_URL}/api/symptoms/check-public`, { symptom });
           localStorage.setItem('lastResult', JSON.stringify(publicRes.data));
           navigate('/results');
-        } else {
-          throw innerErr;
+        } catch (publicErr) {
+          setMessage(publicErr.response?.data?.message || 'An unexpected error occurred.');
         }
+      } else {
+        setMessage(err.response?.data?.message || 'An unexpected error occurred.');
       }
-    } catch (err) {
-      setMessage(err.response?.data?.message || 'An unexpected error occurred.');
     }
   };
 
@@ -93,9 +91,7 @@ function SymptomInput() {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="symptom" className="form-label">
-              Symptom (e.g., headache, fever, cold)
-            </label>
+            <label htmlFor="symptom" className="form-label">Symptom (e.g., headache, fever)</label>
             <input
               id="symptom"
               name="symptom"
@@ -109,9 +105,7 @@ function SymptomInput() {
           </div>
 
           <div className="d-grid">
-            <button type="submit" className="btn btn-animated">
-              Check Symptom
-            </button>
+            <button type="submit" className="btn btn-animated">Check Symptom</button>
           </div>
         </form>
       </div>

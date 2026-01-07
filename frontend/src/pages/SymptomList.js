@@ -11,7 +11,8 @@ function SymptomList() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/api/symptoms/all')
+      
+       .get(`${process.env.REACT_APP_API_URL}/api/symptoms/all`)
       .then((res) => setList(res.data.symptoms || []))
       .catch((err) => setMsg(err.response?.data?.message || 'Error fetching symptoms'));
 
